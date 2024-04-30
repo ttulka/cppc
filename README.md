@@ -28,7 +28,7 @@ Four possible instructions can be formed based on the position of the colon in a
 
 | Instruction | Name | Meaning | Code |
 | :---------: | ---- | ------- | ---- |
-|   | Noop | Do nothing | `....` |
+|   | Noop | Does nothing | `....` |
 | + | Increment | Increments the current register value | `.:..` |
 | - | Decrement | Decrements the current register value | `..:.` |
 | [ | Loop begin | Jumps to the loop end if the current register value is not zero | `:...` |
@@ -187,7 +187,7 @@ C[                              loop forever
 
 ### Hello World
 
-For computing "Hello World," we need to interpret integers in registers as a string.
+For computing "Hello World" we need to interpret integers in registers as a string.
  We can achieve this by defining an alphabet and concatenating register values.
 
 | Symbol | Binary |
@@ -205,10 +205,10 @@ Registers must contain the following values:
 
 | Register | Binary    | Decimal | Interpreted |
 | -------- | --------- | ------- | ----------- |
-| *A*      | 011010100 | 212     | Hel         |
-| *B*      | 100101000 | 296     | lo          |
-| *C*      | 111101110 | 494     | Wor         |
-| *D*      | 100001    | 33      | ld          |
+| *A*      | 011010100 | 212     | `Hel`       |
+| *B*      | 100101000 | 296     | `lo `       |
+| *C*      | 111101110 | 494     | `Wor `      |
+| *D*      | 100001    | 33      | `ld`        |
 
 
 Shortened code:
