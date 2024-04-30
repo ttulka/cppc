@@ -1,0 +1,27 @@
+{
+  "name": "cppc",
+  "version": "1.0.0",
+  "description": ":..: (colon period period colon) esoteric programming language",
+  "main": "cppc.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ttulka/cppc.git"
+  },
+  "keywords": [
+    ":..:",
+    "esolang",
+    "js"
+  ],
+  "author": "Tomas Tulka (ttulka)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ttulka/cppc/issues"
+  },
+  "homepage": "https://github.com/ttulka/cppc#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
