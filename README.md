@@ -181,7 +181,6 @@ C[                              loop forever
     C[ B[ B+ C+] A+ B-] C- A-   move B to A
     C[ D[ D+ C+] D- B+] C- B-   move D to B
     C[ A[ A+ C+] D+ A- B+] C- D- B- 
-
     C[ D[ D+ C+] D- A+] C- A-   copy A to B
 ]
 ```
@@ -206,10 +205,10 @@ Registers must contain the following values:
 
 | Register | Binary    | Decimal | Interpreted |
 | -------- | --------- | ------- | ----------- |
-| *A*      | 011010100 | 212     | `Hel`       |
-| *B*      | 100101000 | 296     | `lo `       |
-| *C*      | 111101110 | 494     | `Wor`       |
-| *D*      | 100001    | 33      | `ld`        |
+| *A*      | 011010100 | 212     | Hel         |
+| *B*      | 100101000 | 296     | lo          |
+| *C*      | 111101110 | 494     | Wor         |
+| *D*      | 100001    | 33      | ld          |
 
 
 Shortened code:
