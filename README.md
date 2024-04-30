@@ -27,8 +27,8 @@ The current register is determined by the index of the instruction in the progra
 Four possible instructions can be formed based on the position of the colon in a 4-tuple:
 
 | Instruction | Name | Meaning | Code |
-| ----------- | ---- | ------- | ---- |
-| . | Noop | Do nothing | `....` |
+| :---------: | ---- | ------- | ---- |
+|   | Noop | Do nothing | `....` |
 | + | Increment | Increments the current register value | `.:..` |
 | - | Decrement | Decrements the current register value | `..:.` |
 | [ | Loop begin | Jumps to the loop end if the current register value is not zero | `:...` |
