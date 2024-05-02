@@ -1,6 +1,9 @@
 const MAX_STEPS = 100000
 
 const interpret = (program, regA, regB, regC, regD, maxSteps, onStepFinished) => {
+    if (!program) throw new Error('Program must be provided')
+    if (regA < 0 || regB  < 0 || regC < 0 || regD  < 0) throw new Error('Register values must be greater than zero')
+    
     // initialize
     const p = parse(program)
     const r = [regA ? regA : 0, regB ? regB : 0, regC ? regC : 0, regD ? regD : 0]

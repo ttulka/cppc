@@ -222,10 +222,167 @@ Shortened code:
 
 ## Turing completeness
 
-:..: is intuitively Turing-complete as it provides four unbounded registers
- (two have been proven to be sufficient), elementary arithmetics, and while loops.
+To demonstrate that :..: is Turing-complete, we can utilize the structured program theorem,
+ which asserts that sequence, selection, and repetition are adequate constructs
+ to construct any computer program.
 
-A concrete proof is still to be done.
+The proof (the folk version) is as follows (pseudocode):
+
+```
+pc = 1
+while (pc > 0) {
+    if (pc == 1) {
+        perform step <1>
+        pc = next step
+    }    
+    ...
+    if (pc == n) {
+        perform step <n>
+        pc = next step
+    }
+}
+```
+
+First, we define new  convenient flow control constructs for selection and repetition:
+
+| Construct | Name | Meaning |
+| --------- | ---- | ------- |
+| r(x)    | Repetition (WHILE) | Repeat *x* while register *r* is not zero |
+| r{x\|y}  | Selection (IF-ELSE) | Execute *x* if register *r* is zero, *y* otherwise |
+
+```
+r(x) =
+
+r[ C+ r+] r-
+C[ r+ <x> r[ C+ r+] r-]
+C-
+```
+
+```
+r{x|y} =
+
+r[ <x> r+ C+] r-
+C[ r+ <y> C+]
+C-
+```
+
+(Because register *C* is used as auxiliary, *r* can only be *A*, *B*, or *D*.)
+
+Having the selection and repetition in place, we can translate any program workflow into a :..: program.
+ As an example, we will demonstrate a translation of a register machine, as register machines
+ with just two registers were proven to be Turing equivalent.
+
+We will use an instruction set of a *program machine*: INC/+, DEC/-, JZ/0
+ (increment, decrement, jump if zero) with program registers *A* and *B*.
+
+(Registers *C* and *D* are auxiliary and must not be used by the simulated program.)
+
+An example program for clearing register *A* and setting it to 1 reads as follows:
+
+```
+Instr.
+
+1.      (A0)
+       ↗ |  \0
+       \ ↓   \
+2.      (A-)  |
+             /
+            ↙ 
+3.      (A+)
+
+```
+
+The corresponding :..: program is as follows:
+
+```
+D+      init pc (D) to 1
+D(      while pc > 0
+                              found                       not found
+                ..................................    ..................
+    C[ D-       D[ A{ D+ D+ D+ | D+ D+ } C+ C+ D+] D- C[ D+ D+       C+] ] C-
+    C[ D- D-    D[ A- D+                 C+ C+ D+] D- C[ D+ D+ D+    C+] ] C-
+    C[ D- D- D- D[ A+                    C+ C+ D+] D- C[ D+ D+ D+ D+ C+] ] C-
+       ........    .....................    ..              ........
+       match pc    perform & update pc      break search    reset pc
+
+    C-  reset search
+)
+```
+
+We use register *D* as the program counter (`pc`). 
+ In the main loop we search for the n-th instruction by decrementing *D* n times.
+ If it matches, we perform the instruction, update the program counter, and
+ break the search by setting *C* to one.
+
+The :..: code reads as follows:
+
+```cppc
+.... .... .... .:..
+.... .... .... :...
+.... .... .:.. .:.:
+.... .... .... ..:.
+.... .... :... .:..
+.... .... :... ....
+.... .... .... ..:.
+.... .... .... :...
+:... .... .... ....
+.... .... .... .:..
+.... .... .... .:..
+.... .... .... .:..
+.:.. .... .:.: ....
+..:. .... :... ....
+.:.. .... .... ....
+.... .... .... .:..
+.... .... .... .:..
+.... .... .:.: ....
+.... .... ..:. ....
+.... .... .:.. ....
+.... .... .:.. ....
+.... .... .:.. ....
+.... .... .... .:.:
+.... .... .... ..:.
+.... .... :... .:..
+.... .... .... .:..
+.... .... .:.: ...:
+.... .... ..:. ....
+.... .... :... ....
+.... .... .... ..:.
+.... .... .... ..:.
+.... .... .... :...
+..:. .... .... .:..
+.... .... .:.. ....
+.... .... .:.. ....
+.... .... .... .:.:
+.... .... .... ..:.
+.... .... :... .:..
+.... .... .... .:..
+.... .... .... .:..
+.... .... .:.: ...:
+.... .... ..:. ....
+.... .... :... ....
+.... .... .... ..:.
+.... .... .... ..:.
+.... .... .... ..:.
+.... .... .... :...
+.:.. .... .... ....
+.... .... .:.. ....
+.... .... .:.. ....
+.... .... .... .:.:
+.... .... .... ..:.
+.... .... :... .:..
+.... .... .... .:..
+.... .... .... .:..
+.... .... .... .:..
+.... .... .:.: ...:
+.... .... ..:. ....
+.... .... ..:. ....
+.... .... .... :...
+.... .... .:.. .:.:
+.... .... .... ..::
+.... .... ..:. ....
+```
+
+Similarly, we can easily translate any register machine to :..: proving it Turing-complete.
 
 ## JavaScript interpreter
 
