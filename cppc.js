@@ -1,6 +1,6 @@
 const MAX_STEPS = 100000
 
-const interpret = (program, regA, regB, regC, regD, maxSteps, onStepFinished) => {
+const interpret = (program, regA, regB, regC, regD, maxSteps, onStep) => {
     if (!program) throw new Error('Program must be provided')
     if (regA < 0 || regB  < 0 || regC < 0 || regD  < 0) throw new Error('Register values must be greater than zero')
     
@@ -38,7 +38,7 @@ const interpret = (program, regA, regB, regC, regD, maxSteps, onStepFinished) =>
             }
         }
 
-        if (onStepFinished) onStepFinished(sc, [...r])
+        if (typeof onStep === 'function') onStep([...r])
         sc++
     }
 
